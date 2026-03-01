@@ -8,9 +8,10 @@ export default function Home() {
   ]
 
   const recentTravel = [
-    { year: '2026', title: 'A chaotic tour of Europe', href: '/travel/europe'},
+    { year: '2026', title: 'A Brief Chaos in Europe', href: '/travel/europe'},
     { year: '2024', title: 'A Summer in Japan', href: '/travel/japan' },
     { year: '2023', title: 'Sights in Southern Italy', href: '/travel/italy' },
+    { year: '2022', title: 'March in France & Spain', href: '/travel/france-spain' },
   ]
 
   return (
@@ -20,7 +21,7 @@ export default function Home() {
           Diego Gonzalez
         </h1>
         <p className="text-xl text-ink max-w-xl leading-relaxed">
-          Mathematics student at the University of Waterloo. I build high-quality software and explore data through a lens of simplicity and intentionality.
+          Mathematics at the University of Waterloo. I build high-quality software and explore data through a lens of simplicity and intentionality.
         </p>
         <p className="text-muted text-lg max-w-xl">
           Currently focused on Software Engineering and Data Science. I believe in making things that feel well-made, like a good book.
@@ -29,7 +30,7 @@ export default function Home() {
 
       <section className="mb-24">
         <div className="flex justify-between items-baseline mb-8">
-          <h2 className="text-sm mono uppercase tracking-widest text-muted m-0">Selected Work</h2>
+          <h2 className="text-sm mono uppercase tracking-widest text-muted m-0">Selected Works</h2>
           <ArrowLink href="/work">View all</ArrowLink>
         </div>
         <div className="flex flex-col">
@@ -41,7 +42,7 @@ export default function Home() {
 
       <section>
         <div className="flex justify-between items-baseline mb-8">
-          <h2 className="text-sm mono uppercase tracking-widest text-muted m-0">Recent Travel</h2>
+          <h2 className="text-sm mono uppercase tracking-widest text-muted m-0">Recent Travels</h2>
           <ArrowLink href="/travel">View all</ArrowLink>
         </div>
         <div className="flex flex-col">

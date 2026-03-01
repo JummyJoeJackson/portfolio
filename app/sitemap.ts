@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { getMDXData } from '@/lib/mdx'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://diegogonzalez.com'
+  const baseUrl = 'https://diegogonzalez.tech'
 
   const work = await getMDXData('work')
   const travel = await getMDXData('travel')
