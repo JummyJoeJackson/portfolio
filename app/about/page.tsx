@@ -28,7 +28,7 @@ export default function AboutPage() {
           <div className="flex flex-col space-y-4">
             <ArrowLink href="mailto:d23gonza@uwaterloo.ca" external>Email</ArrowLink>
             <ArrowLink href="https://github.com/JummyJoeJackson" external>GitHub</ArrowLink>
-            <ArrowLink href="https://linkedin.com/in/diegogonzalez" external>LinkedIn</ArrowLink>
+            <ArrowLink href="https://linkedin.com/in/dgonza-math" external>LinkedIn</ArrowLink>
           </div>
         </section>
       </div>
