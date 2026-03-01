@@ -10,8 +10,6 @@ export default function Home() {
   const recentTravel = [
     { year: '2025', title: 'A Brief Chaos in Europe', href: '/travel/europe'},
     { year: '2024', title: 'A Summer in Japan', href: '/travel/japan' },
-    { year: '2023', title: 'Sights in Southern Italy', href: '/travel/italy' },
-    { year: '2022', title: 'March in France & Spain', href: '/travel/france-spain' },
   ]
 
   return (
