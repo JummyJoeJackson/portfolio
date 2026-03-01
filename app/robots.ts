@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://diegogonzalez.com/sitemap.xml',
+    sitemap: 'https://diegogonzalez.tech/sitemap.xml',
   }
 }

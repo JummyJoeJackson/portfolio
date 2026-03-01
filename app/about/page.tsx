@@ -26,7 +26,7 @@ export default function AboutPage() {
         <section className="mt-16 not-prose">
           <h2 className="text-sm mono uppercase tracking-widest text-muted mb-6">Connect</h2>
           <div className="flex flex-col space-y-4">
-            <ArrowLink href="mailto:d23gonza@uwaterloo.ca" external>Email</ArrowLink>
+            <ArrowLink href="mailto:[EMAIL_ADDRESS]" external>Email</ArrowLink>
             <ArrowLink href="https://github.com/JummyJoeJackson" external>GitHub</ArrowLink>
             <ArrowLink href="https://linkedin.com/in/diegogonzalez" external>LinkedIn</ArrowLink>
           </div>
