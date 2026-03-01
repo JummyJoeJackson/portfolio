@@ -3,13 +3,14 @@ import ArrowLink from '@/components/ArrowLink'
 
 export default function Home() {
   const featuredWork = [
-    { year: '2024', title: 'Midas', href: '/work/midas', description: 'AI-powered fraud detection prototype with high-end visualization.' },
-    { year: '2024', title: 'SignCLI', href: '/work/sign-cli', description: 'Command-line tool for signing and verifying files with ease.' },
+    { year: '2026', title: 'Midas', href: '/work/midas', description: 'AI-powered fraud detection prototype with high-end visualization.' },
+    { year: '2026', title: 'SignCLI', href: '/work/sign-cli', description: 'Command-line tool for signing and verifying files with ease.' },
   ]
 
   const recentTravel = [
+    { year: '2026', title: 'A chaotic tour of Europe', href: '/travel/europe'}
     { year: '2024', title: 'A Summer in Japan', href: '/travel/japan' },
-    { year: '2023', title: 'Notes on Northern Italy', href: '/travel/italy' },
+    { year: '2023', title: 'Sights in Southern Italy', href: '/travel/italy' },
   ]
 
   return (
