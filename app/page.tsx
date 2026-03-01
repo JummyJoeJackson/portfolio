@@ -8,7 +8,7 @@ export default function Home() {
   ]
 
   const recentTravel = [
-    { year: '2026', title: 'A chaotic tour of Europe', href: '/travel/europe'}
+    { year: '2026', title: 'A chaotic tour of Europe', href: '/travel/europe'},
     { year: '2024', title: 'A Summer in Japan', href: '/travel/japan' },
     { year: '2023', title: 'Sights in Southern Italy', href: '/travel/italy' },
   ]
