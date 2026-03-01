@@ -45,3 +45,11 @@ next-env.d.ts
 .idea/
 *.swp
 *.swo
+
+# docs
+/docs
+design-doc.md
+project-requirements.md
+tech-stack.md
+
+.gitignore
