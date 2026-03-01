@@ -12,7 +12,7 @@ export default function AboutPage() {
       
       <div className="prose text-lg leading-relaxed text-ink/90">
         <p>
-          I'm Diego Gonzalez, a Mathematics student at the University of Waterloo with a deep interest in Software Engineering and Data Science. My work is driven by a desire to take complex systems and distill them into simple and high-quality solutions.
+          I am Diego Gonzalez, a Mathematics student at the University of Waterloo with a deep interest in Software Engineering and Data Science. My work is driven by a desire to take complex systems and distill them into simple and high-quality solutions.
         </p>
         
         <p>
