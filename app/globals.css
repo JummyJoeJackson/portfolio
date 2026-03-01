@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f5f2ec;
+  --foreground: #1a1a1a;
+  --muted: #888880;
+  --rule: #d4d0c8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background: #1a1a1a;
+    --foreground: #f5f2ec;
+    --muted: #888880;
+    --rule: #333333;
+  }
+}
+
+.dark {
+  --background: #1a1a1a;
+  --foreground: #f5f2ec;
+  --muted: #888880;
+  --rule: #333333;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: "iA Writer Quattro", Georgia, serif;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Canela", Georgia, serif;
+  color: var(--foreground);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Custom layout utilities */
+.container-reading {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.container-wide {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Typography scale */
+h1 {
+  @apply text-4xl md:text-5xl mb-8;
+}
+h2 {
+  @apply text-2xl md:text-3xl mb-6;
+}
+h3 {
+  @apply text-xl mb-4;
+}
+
+p {
+  @apply mb-6 text-lg;
+}
+
+a {
+  @apply transition-colors duration-200;
+  text-decoration-color: var(--rule);
+}
+
+a:hover {
+  @apply text-muted;
+}
+
+/* MDX Specific Styles */
+.prose {
+  color: var(--foreground);
+}
+
+.prose pre {
+  background-color: rgba(212, 208, 200, 0.2);
+  padding: 1rem;
+  border-radius: 0.125rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+}
+
+.prose code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+  border-radius: 0.125rem;
+  background-color: rgba(212, 208, 200, 0.3);
+}
+
+.prose img {
+  @apply my-12 w-full h-auto;
+}
+
+.prose hr {
+  border-color: var(--rule);
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
