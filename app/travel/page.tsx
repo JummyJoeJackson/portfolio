@@ -20,6 +20,16 @@ export default async function TravelPage() {
 
       <div className="flex flex-col">
         {allTravel.map((post) => (
+          post.metadata.banner && (
+            <link 
+              key={`preload-${post.slug}`} 
+              rel="preload" 
+              as="image" 
+              href={post.metadata.banner} 
+            />
+          )
+        ))}
+        {allTravel.map((post) => (
           <Card
             key={post.slug}
             year={new Date(post.metadata.date).getFullYear().toString()}
