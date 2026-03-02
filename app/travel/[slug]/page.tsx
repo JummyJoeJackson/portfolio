@@ -35,9 +35,9 @@ export default async function TravelDetail({
   }
 
   return (
-    <article className="py-24 prose max-w-none">
+    <article className="pt-0 pb-24 prose max-w-none">
       {post.metadata.banner && (
-        <div className="w-full h-[40vh] relative mb-12 overflow-hidden rounded-lg">
+        <div className="w-full h-[60vh] relative mb-12 overflow-hidden rounded-lg">
           <Image
             src={post.metadata.banner}
             alt={post.metadata.title}

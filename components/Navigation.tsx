@@ -9,12 +9,12 @@ const Navigation = () => {
   ]
 
   return (
-    <nav className="py-12 flex justify-between items-center container-wide">
+    <nav className="py-8 md:py-12 flex flex-col md:flex-row justify-between items-center gap-y-6 md:gap-y-0 container-wide">
       <Link href="/" className="text-xl font-display font-medium">
         Diego Gonzalez
       </Link>
-      <div className="flex items-center space-x-8">
-        <div className="flex space-x-8">
+      <div className="flex items-center space-x-4 md:space-x-8">
+        <div className="flex space-x-4 md:space-x-8">
           {navLinks.map((link) => (
             <Link
               key={link.name}
