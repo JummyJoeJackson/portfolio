@@ -30,6 +30,7 @@ export default function AboutPage() {
             src="/assets/about/diego.jpg"
             alt="Diego Gonzalez"
             fill
+            sizes="(max-width: 768px) 100vw, 360px"
             className="object-cover"
             priority
           />
