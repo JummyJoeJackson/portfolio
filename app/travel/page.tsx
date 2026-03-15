@@ -10,7 +10,7 @@ export default async function TravelPage() {
   const allTravel = await getMDXData('travel')
 
   return (
-    <div className="container-reading py-24">
+    <div className="container-reading py-14">
       <header className="mb-24">
         <h1 className="text-ink">Travel</h1>
         <p className="text-muted text-lg max-w-xl">

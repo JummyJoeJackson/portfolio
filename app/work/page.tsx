@@ -10,7 +10,7 @@ export default async function WorkPage() {
   const allWork = await getMDXData('work')
 
   return (
-    <div className="container-reading py-24">
+    <div className="container-reading py-14">
       <header className="mb-24">
         <h1 className="text-ink">Work</h1>
         <p className="text-muted text-lg max-w-xl">

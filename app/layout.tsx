@@ -39,7 +39,7 @@ export default function RootLayout({
         >
           <Navigation />
           <main>{children}</main>
-          <footer className="py-24 container-wide text-muted text-sm mono uppercase tracking-widest text-center">
+          <footer className="py-12 container-wide text-muted text-sm mono uppercase tracking-widest text-center">
             &copy; {new Date().getFullYear()} Diego Gonzalez. Last Updated: 9:56 PM, March 12.
           </footer>
         </ThemeProvider>

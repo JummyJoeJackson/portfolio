@@ -27,7 +27,7 @@ export default async function WorkDetail({ params }: { params: { slug: string } 
   }
 
   return (
-    <article className="container-reading py-24 prose">
+    <article className="container-reading py-14 prose">
       <header className="mb-12 not-prose">
         <span className="text-sm mono text-muted uppercase tracking-widest block mb-4">
           {new Date(post.metadata.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}

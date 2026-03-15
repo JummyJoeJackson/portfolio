@@ -13,7 +13,7 @@ export default function Home() {
   ]
 
   return (
-    <div className="container-reading py-24">
+    <div className="container-reading py-14">
       <header className="mb-24">
         <h1 className="text-ink">
           Diego Gonzalez
