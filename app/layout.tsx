@@ -42,15 +42,15 @@ export default function RootLayout({
           <footer className="py-12 container-wide text-muted text-sm mono uppercase tracking-widest flex flex-row items-center justify-center gap-4">
             <span>&copy; {new Date().getFullYear()} Diego Gonzalez. Last Updated: 10:04 PM, March 18.</span>
               <div className="flex items-center gap-2">
-                <a href="https://math-webring.vercel.app/#https://diegogonzalez.tech?nav=prev">←</a>
-                <a href="https://math-webring.vercel.app/" target="_blank">
+                <a href="https://math-webring.vercel.app/#diegogonzalez.tech?nav=prev">←</a>
+                <a href="https://math-webring.vercel.app/#diegogonzalez.tech" target="_blank">
                   <img
                     src="https://math-webring.vercel.app/math-webring-pink.svg"
                     alt="Math Webring"
                     className="max-w-[25px] max-h-[25px]"
                   />
                 </a>
-                <a href="https://math-webring.vercel.app/#https://diegogonzalez.tech?nav=next">→</a>
+                <a href="https://math-webring.vercel.app/#diegogonzalez.tech?nav=next">→</a>
               </div>
           </footer>
         </ThemeProvider>
