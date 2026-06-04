@@ -19,10 +19,10 @@ export default function Home() {
           Diego Gonzalez
         </h1>
         <p className="text-xl text-ink max-w-xl leading-relaxed">
-          Mathematics at the University of Waterloo. I build high-quality software and explore data through a lens of simplicity and intentionality.
+          Data Science at the University of Waterloo. I build high-quality software and explore data through a lens of simplicity and intentionality.
         </p>
         <p className="text-muted text-lg max-w-xl">
-          Currently focused on Software Engineering and Data Science. I believe in making things that feel well-made, like a good book.
+          I'm currently focused on building the next generation of AI in Computer Vision and Machine Learning. I believe in making things that feel well-made, like a good book.
         </p>
       </header>
 
@@ -38,7 +38,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section>
+      <section className="mb-24">
         <div className="flex justify-between items-baseline mb-8">
           <h2 className="text-sm mono uppercase tracking-widest text-muted m-0">Recent Travels</h2>
           <ArrowLink href="/travel">View all</ArrowLink>
@@ -47,6 +47,22 @@ export default function Home() {
           {recentTravel.map((item) => (
             <Card key={item.title} {...item} />
           ))}
+        </div>
+      </section>
+
+      <section>
+        <div className="flex justify-between items-baseline mb-8">
+          <h2 className="text-sm mono uppercase tracking-widest text-muted m-0">Get In Touch</h2>
+        </div>
+        <div className="flex flex-col">
+          <p className="text-muted text-lg max-w-xl">
+            I'm looking to build an impactful Winter 2027 co-op term in Software Engineering, Data Science, or AI. If you're working on something interesting and looking for a curious mind to join the team, I'd love to connect.
+          </p>
+        </div>
+        <div className="flex flex-col space-y-4">
+          <ArrowLink href="mailto:d23gonza@uwaterloo.ca" external>Email</ArrowLink>
+          <ArrowLink href="https://github.com/JummyJoeJackson" external>GitHub</ArrowLink>
+          <ArrowLink href="https://linkedin.com/in/dgonza-math" external>LinkedIn</ArrowLink>
         </div>
       </section>
     </div>

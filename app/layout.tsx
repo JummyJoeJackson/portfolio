@@ -40,7 +40,7 @@ export default function RootLayout({
           <Navigation />
           <main>{children}</main>
           <footer className="py-12 container-wide text-muted text-sm mono uppercase tracking-widest flex flex-row items-center justify-center gap-4">
-            <span>&copy; {new Date().getFullYear()} Diego Gonzalez. Last Updated: 10:04 PM, March 18.</span>
+            <span>&copy; {new Date().getFullYear()} Diego Gonzalez. Last Updated: 12:23 PM, June 4th.</span>
               <div className="flex items-center gap-2">
                 <a href="https://math-webring.vercel.app/#diegogonzalez.tech?nav=prev">←</a>
                 <a href="https://math-webring.vercel.app/#diegogonzalez.tech" target="_blank">

@@ -14,7 +14,7 @@ export default function AboutPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12 items-start">
         <div className="prose text-lg leading-relaxed text-ink/90">
           <p>
-            I am Diego Gonzalez, a Mathematics student at the University of Waterloo with a deep interest in Software Engineering and Data Science. My work is driven by a desire to take complex systems and distill them into simple and high-quality solutions.
+            I am Diego Gonzalez, a Data Science student at the University of Waterloo with a deep interest in Software Engineering and AI. My work is driven by a desire to take complex systems and distill them into simple and high-quality solutions.
           </p>
           
           <p>
@@ -36,15 +36,6 @@ export default function AboutPage() {
           />
         </div>
       </div>
-
-      <section className="mt-16 not-prose">
-        <h2 className="text-sm mono uppercase tracking-widest text-muted mb-6">Connect</h2>
-        <div className="flex flex-col space-y-4">
-          <ArrowLink href="mailto:d23gonza@uwaterloo.ca" external>Email</ArrowLink>
-          <ArrowLink href="https://github.com/JummyJoeJackson" external>GitHub</ArrowLink>
-          <ArrowLink href="https://linkedin.com/in/dgonza-math" external>LinkedIn</ArrowLink>
-        </div>
-      </section>
     </div>
   )
 }
