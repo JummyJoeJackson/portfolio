@@ -1,4 +1,3 @@
-import ArrowLink from '@/components/ArrowLink'
 import Image from 'next/image'
 
 export const metadata = {
