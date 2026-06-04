@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 import { ThemeProvider } from '@/components/ThemeProvider'
@@ -44,10 +45,12 @@ export default function RootLayout({
               <div className="flex items-center gap-2">
                 <a href="https://math-webring.vercel.app/#diegogonzalez.tech?nav=prev">←</a>
                 <a href="https://math-webring.vercel.app/#diegogonzalez.tech" target="_blank">
-                  <img
+                  <Image
                     src="https://math-webring.vercel.app/math-webring-pink.svg"
                     alt="Math Webring"
-                    className="max-w-[25px] max-h-[25px]"
+                    width={25}
+                    height={25}
+                    unoptimized
                   />
                 </a>
                 <a href="https://math-webring.vercel.app/#diegogonzalez.tech?nav=next">→</a>
