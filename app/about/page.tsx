@@ -26,7 +26,7 @@ export default function AboutPage() {
         </div>
         <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl shadow-xl">
           <Image
-            src="/assets/about/diego.jpg"
+            src="/assets/about/diego.webp"
             alt="Diego Gonzalez"
             fill
             sizes="(max-width: 768px) 100vw, 360px"
