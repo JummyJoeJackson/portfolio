@@ -73,3 +73,40 @@
     outline-offset: 2px;
   }
 }
+
+/*
+  Anchored overlays for globe markers.
+
+  cobe appends one 1x1 div per marker id carrying `anchor-name: --cobe-<id>`,
+  and writes `--cobe-visible-<id>: N` on :root while that marker faces the
+  camera, deleting the property when it rotates behind the globe. `N` is not a
+  valid value for any of these properties on purpose: when the marker is
+  visible the var() resolves to `N`, the declaration becomes invalid at
+  computed value time and falls back to the inherited value, and when the
+  marker is hidden the var() falls back to the literal we pass in.
+
+  visibility rather than opacity, so hidden markers also leave the
+  accessibility tree and the tab order.
+
+  These rules only make sense where CSS anchor positioning exists; the
+  component checks CSS.supports before rendering anything that uses them.
+*/
+@layer components {
+  .cobe-anchored {
+    position: absolute;
+    position-anchor: var(--cobe-anchor);
+    visibility: var(--cobe-vis);
+  }
+
+  .cobe-marker-hit {
+    left: anchor(center);
+    top: anchor(center);
+    translate: -50% -50%;
+  }
+
+  .cobe-marker-label {
+    left: anchor(center);
+    bottom: anchor(top);
+    translate: -50% -0.5rem;
+  }
+}

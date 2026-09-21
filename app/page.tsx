@@ -1,5 +1,6 @@
 import { NavPlane } from "@/components/NavPlane";
 import { SocialLinks } from "@/components/SocialLinks";
+import { TravelGlobe } from "@/components/TravelGlobe";
 import { site } from "@/data/site";
 
 export default function Home() {
@@ -31,11 +32,7 @@ export default function Home() {
       */}
       <div className="grid min-h-0 grid-cols-2 grid-rows-[minmax(0,1fr)_auto] gap-x-[clamp(1rem,6vw,2rem)] gap-y-[clamp(0.5rem,2dvh,1.5rem)] md:grid-cols-[1fr_2fr_1fr] md:grid-rows-1 md:gap-x-[clamp(1rem,4vw,3rem)]">
         <div className="col-span-2 col-start-1 row-start-1 grid min-h-0 min-w-0 place-items-center [container-type:size] md:col-span-1 md:col-start-2">
-          {/* Phase 2 placeholder. Replaced by the cobe globe in Phase 3. */}
-          <div
-            aria-hidden
-            className="aspect-square w-[min(100cqw,100cqh,30rem)] rounded-full border border-dashed border-border bg-muted/40"
-          />
+          <TravelGlobe className="aspect-square w-[min(100cqw,100cqh,30rem)]" />
         </div>
 
         <NavPlane
