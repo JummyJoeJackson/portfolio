@@ -321,11 +321,20 @@ export function CobeGlobe({
     let frame = 0;
     let last = performance.now();
     let hasPainted = false;
+    let wasPaused = pausedRef.current;
 
     const render = (now: number) => {
       const state = motion.current;
       const delta = Math.min((now - last) / 1000, 0.1);
       last = now;
+
+      /*
+        Closing a card has to resume rotation, and closing it with Escape hands
+        focus back to the marker that opened it, which would otherwise re-arm
+        the focus pause and leave the globe frozen for good.
+      */
+      if (wasPaused && !pausedRef.current) state.interactionPaused = false;
+      wasPaused = pausedRef.current;
 
       if (state.focus) {
         const progress = Math.min(1, (now - state.focus.start) / FOCUS_DURATION);
@@ -507,9 +516,15 @@ export function CobeGlobe({
               <div key={marker.id} className="contents">
                 <button
                   type="button"
+                  data-globe-marker={marker.id}
                   style={anchorStyle}
                   onClick={(event) => handleMarkerActivate(marker.id, event)}
-                  onFocus={() => setInteractionPaused(true)}
+                  onFocus={(event) => {
+                    // Only keyboard focus holds the globe still. A mouse click
+                    // also focuses the button, and pausing for that would stop
+                    // the globe every time someone dismissed a card.
+                    setInteractionPaused(event.currentTarget.matches(":focus-visible"));
+                  }}
                   onBlur={() => setInteractionPaused(false)}
                   onPointerEnter={() => setInteractionPaused(true)}
                   onPointerLeave={() => setInteractionPaused(false)}

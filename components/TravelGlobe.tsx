@@ -1,7 +1,9 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 
+import { PlaceCard } from "@/components/PlaceCard";
+import { PlacesList } from "@/components/PlacesList";
 import {
   CobeGlobe,
   type CobeGlobeHandle,
@@ -10,6 +12,7 @@ import {
 } from "@/components/ui/cobe-globe";
 import { places } from "@/data/places";
 import { features, globeTheme, site } from "@/data/site";
+import { cn } from "@/lib/utils";
 
 /*
   Derived once at module level. places is already a stable module level array,
@@ -27,6 +30,16 @@ const NO_ARCS: GlobeArc[] = [];
 export function TravelGlobe({ className }: { className?: string }) {
   const globeRef = useRef<CobeGlobeHandle>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  /*
+    The element that opened the card, so focus can go back where it came from
+    on close. It may be a marker button or a row of the places list, and after
+    a pointer click the browser has already focused it for us.
+  */
+  const triggerRef = useRef<HTMLElement | null>(null);
+
+  const selected = selectedId
+    ? (places.find((place) => place.id === selectedId) ?? null)
+    : null;
 
   /*
     Flight paths, both behind flags in data/site.ts and off by default.
@@ -35,8 +48,6 @@ export function TravelGlobe({ className }: { className?: string }) {
     shows the route between them.
   */
   const arcs = useMemo<GlobeArc[]>(() => {
-    if (!selectedId) return NO_ARCS;
-    const selected = places.find((place) => place.id === selectedId);
     if (!selected) return NO_ARCS;
 
     const result: GlobeArc[] = [];
@@ -58,24 +69,44 @@ export function TravelGlobe({ className }: { className?: string }) {
       }
     }
     return result;
-  }, [selectedId]);
+  }, [selected]);
 
-  const select = (id: string) => {
+  const select = useCallback((id: string) => {
     const place = places.find((entry) => entry.id === id);
     if (!place) return;
+
+    const active = document.activeElement;
+    triggerRef.current = active instanceof HTMLElement ? active : null;
+
     setSelectedId(id);
     globeRef.current?.focusOn(place.location);
-  };
+  }, []);
+
+  const close = useCallback(() => {
+    setSelectedId(null);
+
+    const trigger = triggerRef.current;
+    triggerRef.current = null;
+    // Only worth restoring if it is still in the document and still focusable;
+    // a marker can rotate out of view while the card is open.
+    if (trigger?.isConnected) trigger.focus();
+  }, []);
 
   return (
-    <CobeGlobe
-      ref={globeRef}
-      className={className}
-      markers={markers}
-      arcs={arcs}
-      theme={globeTheme}
-      paused={selectedId !== null}
-      onMarkerSelect={select}
-    />
+    <div className={cn("relative", className)}>
+      <CobeGlobe
+        ref={globeRef}
+        className="size-full"
+        markers={markers}
+        arcs={arcs}
+        theme={globeTheme}
+        paused={selected !== null}
+        onMarkerSelect={select}
+      />
+
+      <PlacesList onSelect={select} selectedId={selectedId} />
+
+      {selected ? <PlaceCard place={selected} onClose={close} /> : null}
+    </div>
   );
 }
