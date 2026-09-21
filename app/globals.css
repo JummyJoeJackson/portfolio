@@ -1,26 +1,75 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Theme tokens. Light is the default until the light/dark decision is made.
+  Switching the site theme means editing this file and the globe colors in
+  data/site.ts, nothing else.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: oklch(0.985 0 0);
+  --foreground: oklch(0.175 0 0);
+
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.54 0 0);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.175 0 0);
+
+  --border: oklch(0.9 0 0);
+  --ring: oklch(0.6 0 0);
+
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: oklch(0.155 0 0);
+  --foreground: oklch(0.975 0 0);
+
+  --muted: oklch(0.24 0 0);
+  --muted-foreground: oklch(0.68 0 0);
+
+  --card: oklch(0.21 0 0);
+  --card-foreground: oklch(0.975 0 0);
+
+  --border: oklch(1 0 0 / 12%);
+  --ring: oklch(0.7 0 0);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    border-color: var(--border);
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  html {
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
 }

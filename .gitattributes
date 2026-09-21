@@ -1,0 +1,11 @@
+# Keep binary assets byte-for-byte. Without this, autocrlf rewrites newlines
+# inside them and breaks PDF xref offsets and image data on checkout.
+*.pdf binary
+*.ico binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.woff binary
+*.woff2 binary
