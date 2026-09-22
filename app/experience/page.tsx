@@ -3,6 +3,7 @@ import { Plane, PlaneLanding } from "lucide-react";
 
 import { PageShell } from "@/components/PageShell";
 import { Ticket, TicketField } from "@/components/Ticket";
+import { TicketDeck } from "@/components/TicketDeck";
 import { experience } from "@/data/experience";
 
 export const metadata: Metadata = {
@@ -13,16 +14,16 @@ export default function ExperiencePage() {
   return (
     <PageShell title="Arrivals" subtitle="(Experience)" icon={PlaneLanding}>
       {/*
-        One boarding pass per role. Every field comes from data/experience.ts;
+        One boarding pass per role, dealt as a deck per section 7.3. Every
+        field comes from data/experience.ts;
         the date range doubles as the route, which is the one mapping that fits
         rather than being forced, since a job really is a trip between two
         dates. All tickets share a width and a field row, so the values still
         line up down the page.
       */}
-      <ul className="space-y-6">
+      <TicketDeck label="Experience tickets">
         {experience.map((entry) => (
-          <li key={entry.id}>
-            <Ticket id={entry.id}>
+          <Ticket key={entry.id} id={entry.id}>
               <h2 className="text-sm font-medium">
                 {entry.link ? (
                   <a
@@ -66,10 +67,9 @@ export default function ExperiencePage() {
                   </li>
                 ))}
               </ul>
-            </Ticket>
-          </li>
+          </Ticket>
         ))}
-      </ul>
+      </TicketDeck>
     </PageShell>
   );
 }

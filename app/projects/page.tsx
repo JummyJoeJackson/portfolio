@@ -4,6 +4,7 @@ import { PlaneTakeoff } from "lucide-react";
 
 import { PageShell } from "@/components/PageShell";
 import { Ticket, TicketField } from "@/components/Ticket";
+import { TicketDeck } from "@/components/TicketDeck";
 import { projects } from "@/data/projects";
 
 export const metadata: Metadata = {
@@ -18,10 +19,9 @@ export default function ProjectsPage() {
         No route line here: a project has no date range to fly between, and
         inventing one would be the gimmick the brief warns against.
       */}
-      <ul className="space-y-6">
+      <TicketDeck label="Project tickets">
         {projects.map((project) => (
-          <li key={project.id}>
-            <Ticket id={project.id}>
+          <Ticket key={project.id} id={project.id}>
               {project.image ? (
                 <div className="relative mb-4 aspect-[3/2] w-full overflow-hidden rounded-md bg-muted">
                   <Image
@@ -80,10 +80,9 @@ export default function ProjectsPage() {
                   </TicketField>
                 ) : null}
               </div>
-            </Ticket>
-          </li>
+          </Ticket>
         ))}
-      </ul>
+      </TicketDeck>
     </PageShell>
   );
 }
