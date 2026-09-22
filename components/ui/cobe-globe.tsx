@@ -492,7 +492,7 @@ export function CobeGlobe({
         <canvas
           ref={canvasRef}
           className={cn(
-            "h-full w-full cursor-grab transition-opacity duration-700 active:cursor-grabbing",
+            "h-full w-full cursor-grab transition-opacity duration-[400ms] active:cursor-grabbing",
             status === "ready" ? "opacity-100" : "opacity-0",
           )}
         />

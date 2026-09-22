@@ -18,11 +18,11 @@ export type PageShellProps = {
  * column, with no bar, border or background band. Unlike the home page these
  * are allowed to scroll.
  *
- * Phase 6 adds the fade-in here, so both subpages inherit it from one place.
+ * The entrance lives here so both subpages inherit it from one place.
  */
 export function PageShell({ title, subtitle, icon: Icon, children }: PageShellProps) {
   return (
-    <main className="mx-auto w-full max-w-2xl px-6 py-12 md:py-16">
+    <main className="page-enter mx-auto w-full max-w-2xl px-6 py-12 md:py-16">
       <Link
         href="/"
         className="group inline-flex items-center gap-1.5 rounded-sm text-sm text-muted-foreground transition-colors hover:text-foreground"
