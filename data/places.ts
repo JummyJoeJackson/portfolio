@@ -38,6 +38,10 @@ export type Place = {
 
 /**
  * PLACEHOLDER DATA. Replace with real trips and photos in public/places/.
+ *
+ * The images are neutral generated stand-ins, not real photographs, so the
+ * card's photo path is exercised before the real ones arrive. Overwrite the
+ * files in public/places/ and the entries pick them up.
  * Defined at module level so the reference stays stable across renders.
  */
 export const places: Place[] = [
@@ -48,8 +52,7 @@ export const places: Place[] = [
     location: [35.6762, 139.6503],
     date: "Placeholder date",
     note: "Placeholder note. Replace this entry with a real trip.",
-    // A photo is optional. Drop the file in public/places/ and point at it:
-    // image: "/places/tokyo.jpg",
+    image: "/places/tokyo.png",
   },
   {
     id: "lisbon",
@@ -58,6 +61,7 @@ export const places: Place[] = [
     location: [38.7223, -9.1393],
     date: "Placeholder date",
     note: "Placeholder note. Replace this entry with a real trip.",
+    image: "/places/lisbon.png",
   },
   {
     id: "mexico-city",
@@ -66,6 +70,7 @@ export const places: Place[] = [
     location: [19.4326, -99.1332],
     date: "Placeholder date",
     note: "Placeholder note. Replace this entry with a real trip.",
+    image: "/places/mexico-city.png",
   },
   {
     id: "reykjavik",
@@ -74,6 +79,7 @@ export const places: Place[] = [
     location: [64.1466, -21.9426],
     date: "Placeholder date",
     note: "Placeholder note. Replace this entry with a real trip.",
+    image: "/places/reykjavik.png",
   },
 ];
 

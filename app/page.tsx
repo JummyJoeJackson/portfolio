@@ -84,7 +84,7 @@ export default function Home() {
           plain centered text that belongs to the hero.
         */}
         <div className={`hero-enter text-center ${ENTER.text}`}>
-          <h1 className="text-2xl font-medium tracking-tight md:text-3xl">
+          <h1 className="board-sign text-2xl font-medium md:text-3xl">
             {site.name}
           </h1>
           <p className="mt-1 text-sm text-muted-foreground md:text-base">
