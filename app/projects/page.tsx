@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { PlaneTakeoff } from "lucide-react";
+import { Plane, PlaneTakeoff } from "lucide-react";
 
 import { PageShell } from "@/components/PageShell";
 import { Ticket, TicketField } from "@/components/Ticket";
@@ -15,9 +15,10 @@ export default function ProjectsPage() {
   return (
     <PageShell title="Departures" subtitle="(Projects)" icon={PlaneTakeoff}>
       {/*
-        Same boarding pass as Arrivals, with the fields a project actually has.
-        No route line here: a project has no date range to fly between, and
-        inventing one would be the gimmick the brief warns against.
+        Same boarding pass as Arrivals, down to the route and location, so a
+        ticket reads identically whichever page it is on. The route is the span
+        the project ran; both are optional in the data, so a project without
+        dates simply drops that row.
       */}
       <TicketDeck label="Project tickets">
         {projects.map((project) => (
@@ -38,6 +39,27 @@ export default function ProjectsPage() {
               <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">
                 {project.summary}
               </p>
+
+              {project.start && project.end ? (
+                <div className="mt-4 flex flex-wrap items-end gap-x-6 gap-y-3">
+                  <div className="flex items-end gap-3">
+                    <TicketField label="From">
+                      <span className="tabular-nums">{project.start}</span>
+                    </TicketField>
+                    <Plane
+                      aria-hidden
+                      className="mb-1 size-3.5 shrink-0 text-muted-foreground"
+                    />
+                    <TicketField label="To">
+                      <span className="tabular-nums">{project.end}</span>
+                    </TicketField>
+                  </div>
+
+                  {project.location ? (
+                    <TicketField label="Location">{project.location}</TicketField>
+                  ) : null}
+                </div>
+              ) : null}
 
               <div className="mt-4 flex flex-wrap items-end gap-x-6 gap-y-3">
                 {project.tags.length > 0 ? (
