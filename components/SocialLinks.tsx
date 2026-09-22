@@ -50,52 +50,64 @@ export function SocialLinks({ className }: { className?: string }) {
             </a>
           </li>
         ))}
+
+        {/*
+          The webring rides in the same row as the links, so the footer stays
+          one line and the globe keeps the height a second row would have cost
+          it. The badge is 16px to sit on the same line as 12 to 14px text; at
+          the 24px it ships at it would set the row height on its own.
+
+          The arrows carry an aria-label with the glyph hidden, so a screen
+          reader says where the link goes rather than reading out an arrow.
+          They are padded rather than boxed, which keeps them the same height
+          as the text links beside them. The badge link takes its name from
+          the image alt.
+        */}
+        <li className="flex items-center gap-2">
+          <span aria-hidden className="select-none opacity-60">
+            ·
+          </span>
+          <span className="flex items-center gap-1">
+            <a
+              href={webring.prev}
+              aria-label="Previous site in the math webring"
+              className="rounded-sm px-1 transition-colors hover:text-foreground"
+            >
+              <span aria-hidden>&larr;</span>
+            </a>
+
+            <a
+              href={webring.ring}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-sm"
+            >
+              {/*
+                A plain img, not next/image: this is a third party SVG, and
+                Next does not optimise SVGs anyway, so routing it through the
+                image pipeline would only mean declaring a remote host for no
+                gain.
+              */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://math-webring.vercel.app/math-webring-pink.svg"
+                alt="Math Webring"
+                width={16}
+                height={16}
+                className="h-4 w-auto"
+              />
+            </a>
+
+            <a
+              href={webring.next}
+              aria-label="Next site in the math webring"
+              className="rounded-sm px-1 transition-colors hover:text-foreground"
+            >
+              <span aria-hidden>&rarr;</span>
+            </a>
+          </span>
+        </li>
       </ul>
-
-      {/*
-        The arrows carry an aria-label and the glyph itself is hidden, so a
-        screen reader says where the link goes rather than reading out an
-        arrow. Each one gets a 24px box so it is not a one character tap
-        target. The badge link takes its name from the image alt.
-      */}
-      <div className="mt-3 flex items-center justify-center gap-2 text-muted-foreground">
-        <a
-          href={webring.prev}
-          aria-label="Previous site in the math webring"
-          className="inline-flex size-6 items-center justify-center rounded-sm text-xs transition-colors hover:text-foreground"
-        >
-          <span aria-hidden>&larr;</span>
-        </a>
-
-        <a
-          href={webring.ring}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center rounded-sm"
-        >
-          {/*
-            A plain img, not next/image: this is a third party SVG, and Next
-            does not optimise SVGs anyway, so routing it through the image
-            pipeline would only mean declaring a remote host for no gain.
-          */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://math-webring.vercel.app/math-webring-pink.svg"
-            alt="Math Webring"
-            width={24}
-            height={24}
-            className="h-6 w-auto"
-          />
-        </a>
-
-        <a
-          href={webring.next}
-          aria-label="Next site in the math webring"
-          className="inline-flex size-6 items-center justify-center rounded-sm text-xs transition-colors hover:text-foreground"
-        >
-          <span aria-hidden>&rarr;</span>
-        </a>
-      </div>
     </footer>
   );
 }
