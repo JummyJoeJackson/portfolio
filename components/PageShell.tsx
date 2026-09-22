@@ -22,27 +22,38 @@ export type PageShellProps = {
  */
 export function PageShell({ title, subtitle, icon: Icon, children }: PageShellProps) {
   return (
-    <main className="page-enter mx-auto w-full max-w-2xl px-6 py-12 md:py-16">
-      <Link
-        href="/"
-        className="group inline-flex items-center gap-1.5 rounded-sm text-sm text-muted-foreground transition-colors hover:text-foreground"
-      >
-        <ArrowLeft
-          aria-hidden
-          className="size-4 motion-safe:transition-transform motion-safe:duration-200 motion-safe:group-hover:-translate-x-0.5"
-        />
-        Back
-      </Link>
+    /*
+      The back link and the title stay at the top, per section 7, and the
+      content centres in whatever height is left. The second track is 1fr,
+      whose minimum is auto, so once the content is taller than the leftover
+      space the track grows with it and the page simply scrolls. Centring
+      never clips the top the way a fixed height flex centre would.
+    */
+    <main className="page-enter mx-auto grid min-h-dvh w-full max-w-2xl grid-rows-[auto_1fr] px-6 py-12 md:py-16">
+      <div>
+        <Link
+          href="/"
+          className="group inline-flex items-center gap-1.5 rounded-sm text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeft
+            aria-hidden
+            className="size-4 motion-safe:transition-transform motion-safe:duration-200 motion-safe:group-hover:-translate-x-0.5"
+          />
+          Back
+        </Link>
 
-      <div className="mt-10">
-        <h1 className="board-sign flex items-center gap-2 text-lg font-medium md:text-xl">
-          <Icon aria-hidden className="size-5 shrink-0" />
-          {title}
-        </h1>
-        <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
+        <div className="mt-10">
+          <h1 className="board-sign flex items-center gap-2 text-lg font-medium md:text-xl">
+            <Icon aria-hidden className="size-5 shrink-0" />
+            {title}
+          </h1>
+          <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
+        </div>
       </div>
 
-      <div className="mt-10">{children}</div>
+      <div className="flex items-center py-10">
+        <div className="w-full">{children}</div>
+      </div>
     </main>
   );
 }
