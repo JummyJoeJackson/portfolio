@@ -24,14 +24,44 @@ const DEPTH_SCALE = 0.04;
 /** Travel before a gesture counts as a drag rather than a click, as on the globe. */
 const DRAG_SLOP = 5;
 /*
-  How far a card can be pulled from its resting place. Without constraints the
-  drag is unbounded, and dragElastic does nothing at all, since elasticity only
-  applies past a constraint. Inside this the card tracks the pointer exactly;
-  past it, it resists.
+  How far a card can be pulled, and how far it has to go to count, both scaled
+  to the screen. Without constraints the drag is unbounded, and dragElastic
+  does nothing at all, since elasticity only applies past a constraint.
+
+  These are per breakpoint because a card is as wide as the text column: on a
+  phone there is only about 24px of room beside it, so a desktop sized pull
+  throws it a long way off screen. Scaling the distance down keeps the gesture
+  in proportion, and scaling the threshold with it keeps the swipe from feeling
+  longer on a small screen than a large one.
 */
-const DRAG_LIMIT = 180;
-/** Travel, or flick speed, needed to actually send a card away. */
-const ADVANCE_PX = 90;
+type Screen = "mobile" | "tablet" | "desktop";
+
+const DRAG_PRESETS: Record<Screen, { limit: number; advance: number }> = {
+  mobile: { limit: 96, advance: 52 },
+  tablet: { limit: 140, advance: 72 },
+  desktop: { limit: 180, advance: 90 },
+};
+
+const TABLET_UP = "(min-width: 640px)";
+const DESKTOP_UP = "(min-width: 1024px)";
+
+function subscribeToScreen(onChange: () => void) {
+  const lists = [window.matchMedia(TABLET_UP), window.matchMedia(DESKTOP_UP)];
+  for (const list of lists) list.addEventListener("change", onChange);
+  return () => {
+    for (const list of lists) list.removeEventListener("change", onChange);
+  };
+}
+
+function readScreen(): Screen {
+  if (window.matchMedia(DESKTOP_UP).matches) return "desktop";
+  if (window.matchMedia(TABLET_UP).matches) return "tablet";
+  return "mobile";
+}
+
+/** Server has no width to read, so it assumes desktop and corrects on mount. */
+const readScreenOnServer = (): Screen => "desktop";
+
 const ADVANCE_VELOCITY = 500;
 
 /*
@@ -91,6 +121,9 @@ export function TicketDeck({
   const [shuffle, setShuffle] = useState<Shuffle | null>(null);
   const reduced = useReducedMotion();
   const mounted = useSyncExternalStore(subscribeNever, () => true, () => false);
+  const drag = DRAG_PRESETS[
+    useSyncExternalStore(subscribeToScreen, readScreen, readScreenOnServer)
+  ];
   const dragged = useRef(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const statusId = useId();
@@ -225,7 +258,7 @@ export function TicketDeck({
                 drag={
                   isActive && shuffle === null && total > 1 ? "x" : false
                 }
-                dragConstraints={{ left: -DRAG_LIMIT, right: DRAG_LIMIT }}
+                dragConstraints={{ left: -drag.limit, right: drag.limit }}
                 dragSnapToOrigin
                 dragElastic={0.18}
                 dragMomentum={false}
@@ -236,7 +269,7 @@ export function TicketDeck({
                   if (Math.abs(info.offset.x) > DRAG_SLOP) dragged.current = true;
                 }}
                 onDragEnd={(_, info) => {
-                  const far = Math.abs(info.offset.x) > ADVANCE_PX;
+                  const far = Math.abs(info.offset.x) > drag.advance;
                   const fast = Math.abs(info.velocity.x) > ADVANCE_VELOCITY;
                   if (!far && !fast) return; // springs back on its own
                   // Left sends you forward, the way a discarded card reads.
