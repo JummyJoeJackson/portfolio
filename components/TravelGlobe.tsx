@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useRef, useState } from "react";
 
-import { PlaceCard } from "@/components/PlaceCard";
+import { PlaceCard, type Point } from "@/components/PlaceCard";
 import { PlacesList } from "@/components/PlacesList";
 import {
   CobeGlobe,
@@ -36,6 +36,12 @@ export function TravelGlobe({ className }: { className?: string }) {
     a pointer click the browser has already focused it for us.
   */
   const triggerRef = useRef<HTMLElement | null>(null);
+  /*
+    Where the reader dragged the card to. Held here rather than in the card so
+    it survives closing one place and opening another, and reset only on a
+    reload.
+  */
+  const [cardOffset, setCardOffset] = useState<Point>({ x: 0, y: 0 });
 
   const selected = selectedId
     ? (places.find((place) => place.id === selectedId) ?? null)
@@ -106,7 +112,14 @@ export function TravelGlobe({ className }: { className?: string }) {
 
       <PlacesList onSelect={select} selectedId={selectedId} />
 
-      {selected ? <PlaceCard place={selected} onClose={close} /> : null}
+      {selected ? (
+        <PlaceCard
+          place={selected}
+          onClose={close}
+          offset={cardOffset}
+          onOffsetChange={setCardOffset}
+        />
+      ) : null}
     </div>
   );
 }
