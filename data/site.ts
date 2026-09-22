@@ -5,14 +5,8 @@
 
 export const site = {
   name: "Diego Gonzalez",
-  /**
-   * Absolute origin, used to resolve Open Graph and icon URLs. Social
-   * scrapers will not follow a relative path, so this has to be absolute.
-   * Vercel preview builds fall back to their own URL, see app/layout.tsx.
-   */
   url: "https://diegogonzalez.tech",
   hook: "I turn messy data into something you can use",
-  /** Used for the flight-path arc origin in section 5.6. */
   home: {
     label: "Toronto",
     location: [43.6532, -79.3832] as [number, number],

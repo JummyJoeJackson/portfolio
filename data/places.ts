@@ -46,6 +46,15 @@ export type Place = {
  */
 export const places: Place[] = [
   {
+    id: "toronto",
+    label: "Toronto",
+    name: "Toronto, Canada",
+    location: [43.6532, -79.3832],
+    date: "All my life",
+    note: "Home.",
+    image: "/places/toronto.png",
+  },
+  {
     id: "tokyo",
     label: "Tokyo",
     name: "Tokyo, Japan",
