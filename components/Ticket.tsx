@@ -102,7 +102,14 @@ export function Ticket({
         className,
       )}
     >
-      <div className="min-w-0 flex-1 p-4 md:p-5">{children}</div>
+      {/*
+        Centred rather than top aligned, because the deck stretches every card
+        to a shared height and the contents would otherwise sit against the
+        top edge of a half empty ticket.
+      */}
+      <div className="flex min-w-0 flex-1 flex-col justify-center p-4 md:p-5">
+        {children}
+      </div>
 
       {/*
         The stub. Everything in it is decorative and fabricated, so it is

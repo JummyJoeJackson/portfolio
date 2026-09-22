@@ -18,6 +18,15 @@ import { cn } from "@/lib/utils";
 
 /** Cards drawn behind the active one. Deeper ones stay mounted but invisible. */
 const VISIBLE_BEHIND = 2;
+/*
+  Floor for the deck, so a ticket is the same size on Arrivals and Departures
+  even though an experience carries bullets and a project does not. Cards
+  stretch to fill it, so every ticket is one object of one size. Raise it if a
+  real entry outgrows it: whichever deck holds the tallest card grows past the
+  floor, and the two pages stop matching.
+*/
+const DECK_MIN_HEIGHT = "min-h-[20rem] md:min-h-[14rem]";
+
 /** Offset and shrink applied per card of depth, which is what gives the pile depth. */
 const DEPTH_Y = 10;
 const DEPTH_SCALE = 0.04;
@@ -156,10 +165,10 @@ export function TicketDeck({
           takes the height of the tallest one on its own. No measuring, and no
           jump as shorter cards come forward.
 
-          items-center matters: grid items stretch by default, which pulled
-          every card out to the tallest card's height and left its contents
-          sitting against the top edge. Centred, each card keeps its own height
-          and sits in the middle of the pile.
+          Cards deliberately stretch to fill the cell rather than keeping
+          their own heights, which is what makes every ticket the same object
+          on both pages. Ticket centres its own contents, so stretching no
+          longer leaves text against the top edge.
 
           The padding leaves room for the offset of the cards behind, which
           transforms do not reserve.
@@ -169,7 +178,10 @@ export function TicketDeck({
           tabIndex={mounted ? 0 : undefined}
           onKeyDown={onKeyDown}
           aria-describedby={statusId}
-          className="grid items-center rounded-lg pb-6 outline-none focus-visible:outline-2 focus-visible:outline-offset-4 [&>*]:col-start-1 [&>*]:row-start-1"
+          className={cn(
+            "grid rounded-lg pb-6 outline-none focus-visible:outline-2 focus-visible:outline-offset-4 [&>*]:col-start-1 [&>*]:row-start-1",
+            DECK_MIN_HEIGHT,
+          )}
         >
           {cards.map((card, position) => {
             const depth = (position - index + total) % total;
