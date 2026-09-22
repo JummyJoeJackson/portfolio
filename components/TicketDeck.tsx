@@ -18,21 +18,32 @@ import { cn } from "@/lib/utils";
 
 /** Cards drawn behind the active one. Deeper ones stay mounted but invisible. */
 const VISIBLE_BEHIND = 2;
+/** Offset and shrink applied per card of depth, which is what gives the pile depth. */
+const DEPTH_Y = 10;
+const DEPTH_SCALE = 0.04;
 /** Travel before a gesture counts as a drag rather than a click, as on the globe. */
 const DRAG_SLOP = 5;
 /** Travel, or flick speed, needed to actually send a card away. */
 const ADVANCE_PX = 90;
 const ADVANCE_VELOCITY = 500;
-/** How long the discarded card takes to clear the frame. */
-const EXIT_MS = 280;
 
 /*
-  Without JavaScript the deck cannot deal cards, so it un-stacks itself back
-  into the plain list the page would otherwise have rendered. Doing it from a
-  noscript stylesheet rather than from React means the server can ship the
-  stacked markup directly and there is no flash of a list collapsing into a
-  deck on hydration.
+  The shuffle runs in two halves. First the front card lifts clear of the pile
+  and tilts, still on top of everything. Then the order changes underneath it
+  and it settles back down into the last slot, straightening as it goes.
+
+  It has to be two halves because the card has to be above the pile while it
+  rises and below it while it drops, and z-index cannot be animated through.
+  Swapping it at the turn is invisible, since the card is clear of the others
+  at that moment.
 */
+const LIFT_MS = 190;
+const TUCK_MS = 280;
+const LIFT_Y = 72;
+const LIFT_TILT = 7; // degrees
+
+type Shuffle = { position: number; dir: -1 | 1; phase: "lift" | "tuck" };
+
 /*
   inert and pointer-events must not reach the server HTML: without JavaScript
   every card is on show, and shipping those would leave all but the first one
@@ -43,6 +54,13 @@ const EXIT_MS = 280;
 */
 const subscribeNever = () => () => {};
 
+/*
+  Without JavaScript the deck cannot deal cards, so it un-stacks itself back
+  into the plain list the page would otherwise have rendered. Doing it from a
+  noscript stylesheet rather than from React means the server can ship the
+  stacked markup directly and there is no flash of a list collapsing into a
+  deck on hydration.
+*/
 const NO_JS_FALLBACK = `<style>
 [data-deck]{display:block!important;padding-bottom:0!important}
 [data-deck]>*{transform:none!important;opacity:1!important;z-index:auto!important;margin-bottom:1.5rem}
@@ -63,40 +81,43 @@ export function TicketDeck({
   const total = cards.length;
 
   const [index, setIndex] = useState(0);
-  const [exit, setExit] = useState<-1 | 1 | null>(null);
+  const [shuffle, setShuffle] = useState<Shuffle | null>(null);
   const reduced = useReducedMotion();
-  const mounted = useSyncExternalStore(
-    subscribeNever,
-    () => true,
-    () => false,
-  );
+  const mounted = useSyncExternalStore(subscribeNever, () => true, () => false);
   const dragged = useRef(false);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const statusId = useId();
 
   useEffect(() => {
+    const pending = timers.current;
     return () => {
-      if (timer.current) clearTimeout(timer.current);
+      for (const id of pending) clearTimeout(id);
     };
   }, []);
 
   const go = useCallback(
-    (delta: 1 | -1, direction: -1 | 1) => {
-      if (exit !== null || total < 2) return; // already dealing
-      const commit = () => {
-        setIndex((value) => (value + delta + total) % total);
-        setExit(null);
-      };
+    (delta: 1 | -1, dir: -1 | 1) => {
+      if (shuffle !== null || total < 2) return; // mid shuffle
+      const advance = () => setIndex((value) => (value + delta + total) % total);
 
-      // Reduced motion cuts straight to the next card, no fly off.
+      // Reduced motion cuts straight to the next card, no lift and no tilt.
       if (reduced) {
-        commit();
+        advance();
         return;
       }
-      setExit(direction);
-      timer.current = setTimeout(commit, EXIT_MS);
+
+      const position = index;
+      setShuffle({ position, dir, phase: "lift" });
+      timers.current.push(
+        setTimeout(() => {
+          // Reorder underneath the raised card, then let it drop into the back.
+          advance();
+          setShuffle({ position, dir, phase: "tuck" });
+          timers.current.push(setTimeout(() => setShuffle(null), TUCK_MS));
+        }, LIFT_MS),
+      );
     },
-    [exit, reduced, total],
+    [index, reduced, shuffle, total],
   );
 
   const onKeyDown = useCallback(
@@ -133,21 +154,29 @@ export function TicketDeck({
         {/*
           Every card occupies the same grid cell, so they stack and the deck
           takes the height of the tallest one on its own. No measuring, and no
-          jump as shorter cards come forward. The padding leaves room for the
-          offset of the cards behind, which transforms do not reserve.
+          jump as shorter cards come forward.
+
+          items-center matters: grid items stretch by default, which pulled
+          every card out to the tallest card's height and left its contents
+          sitting against the top edge. Centred, each card keeps its own height
+          and sits in the middle of the pile.
+
+          The padding leaves room for the offset of the cards behind, which
+          transforms do not reserve.
         */}
         <div
           data-deck
           tabIndex={mounted ? 0 : undefined}
           onKeyDown={onKeyDown}
           aria-describedby={statusId}
-          className="grid rounded-lg pb-6 outline-none focus-visible:outline-2 focus-visible:outline-offset-4 [&>*]:col-start-1 [&>*]:row-start-1"
+          className="grid items-center rounded-lg pb-6 outline-none focus-visible:outline-2 focus-visible:outline-offset-4 [&>*]:col-start-1 [&>*]:row-start-1"
         >
           {cards.map((card, position) => {
             const depth = (position - index + total) % total;
             const isActive = depth === 0;
             const hidden = depth > VISIBLE_BEHIND;
-            const leaving = isActive && exit !== null;
+            const lifting =
+              shuffle?.position === position && shuffle.phase === "lift";
 
             return (
               <motion.div
@@ -156,23 +185,38 @@ export function TicketDeck({
                 // inert, which drops them from the tab order and the
                 // accessibility tree in one attribute.
                 {...(mounted && !isActive ? { inert: true } : {})}
-                style={{ zIndex: total - depth }}
+                // Above the whole pile while it rises, back in the normal
+                // order once it starts dropping behind.
+                style={{ zIndex: lifting ? total + 10 : total - depth }}
                 // Render straight at these values, so the server ships the
                 // deck already stacked instead of a list that snaps together
                 // on hydration.
                 initial={false}
-                animate={{
-                  x: leaving ? exit * 520 : 0,
-                  y: depth * 10,
-                  scale: 1 - depth * 0.04,
-                  opacity: hidden ? 0 : leaving ? 0 : 1,
-                }}
-                transition={
-                  leaving
-                    ? { duration: EXIT_MS / 1000, ease: "easeIn" }
-                    : { type: "spring", stiffness: 420, damping: 38 }
+                animate={
+                  lifting
+                    ? {
+                        x: 0,
+                        y: -LIFT_Y,
+                        rotate: (shuffle?.dir ?? -1) * LIFT_TILT,
+                        scale: 1.03,
+                        opacity: 1,
+                      }
+                    : {
+                        x: 0,
+                        y: depth * DEPTH_Y,
+                        rotate: 0,
+                        scale: 1 - depth * DEPTH_SCALE,
+                        opacity: hidden ? 0 : 1,
+                      }
                 }
-                drag={isActive && !leaving && total > 1 ? "x" : false}
+                transition={
+                  lifting
+                    ? { duration: LIFT_MS / 1000, ease: "easeOut" }
+                    : { type: "spring", stiffness: 340, damping: 32 }
+                }
+                drag={
+                  isActive && shuffle === null && total > 1 ? "x" : false
+                }
                 dragSnapToOrigin
                 dragElastic={0.18}
                 dragMomentum={false}
