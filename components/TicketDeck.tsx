@@ -23,6 +23,13 @@ const DEPTH_Y = 10;
 const DEPTH_SCALE = 0.04;
 /** Travel before a gesture counts as a drag rather than a click, as on the globe. */
 const DRAG_SLOP = 5;
+/*
+  How far a card can be pulled from its resting place. Without constraints the
+  drag is unbounded, and dragElastic does nothing at all, since elasticity only
+  applies past a constraint. Inside this the card tracks the pointer exactly;
+  past it, it resists.
+*/
+const DRAG_LIMIT = 180;
 /** Travel, or flick speed, needed to actually send a card away. */
 const ADVANCE_PX = 90;
 const ADVANCE_VELOCITY = 500;
@@ -218,6 +225,7 @@ export function TicketDeck({
                 drag={
                   isActive && shuffle === null && total > 1 ? "x" : false
                 }
+                dragConstraints={{ left: -DRAG_LIMIT, right: DRAG_LIMIT }}
                 dragSnapToOrigin
                 dragElastic={0.18}
                 dragMomentum={false}

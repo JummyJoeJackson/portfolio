@@ -61,6 +61,17 @@
 
   html {
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    /*
+      A dragged ticket is moved with a transform, which does not affect layout
+      but does extend the scrollable area, so without this the page grows
+      sideways and a horizontal scrollbar appears while you drag.
+
+      clip rather than hidden: hidden would make the root a scroll container in
+      both axes, while clip just refuses the overflow. Browsers without clip
+      fall back to the old behaviour, which the drag constraints already keep
+      within a reasonable bound.
+    */
+    overflow-x: clip;
   }
 
   body {
