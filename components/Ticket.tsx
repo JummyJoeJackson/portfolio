@@ -16,6 +16,21 @@ import { cn } from "@/lib/utils";
   place card.
 */
 
+/*
+  Minimum size for a ticket, so one is the same object on Arrivals and
+  Departures even though an experience carries bullets and a project does not.
+
+  It sits on the ticket rather than on the deck because a min-height on the
+  deck only guarantees the deck area, not the card inside it. Two values
+  because the stub sits beside the body at md and below it under that, which
+  makes a narrow ticket a good deal taller.
+
+  Measured against the tallest placeholder entry, roughly 202px at desktop and
+  306px at mobile. Raise these if a real entry outgrows them: that deck grows
+  past the floor and the two pages stop matching.
+*/
+const MIN_TICKET_HEIGHT = "min-h-[20rem] md:min-h-[15rem]";
+
 /**
  * Stable pseudo-random seed from an entry id, so SSR and the client agree.
  *
@@ -99,6 +114,7 @@ export function Ticket({
     <div
       className={cn(
         "relative flex flex-col overflow-hidden rounded-lg border border-border bg-card md:flex-row",
+        MIN_TICKET_HEIGHT,
         className,
       )}
     >
