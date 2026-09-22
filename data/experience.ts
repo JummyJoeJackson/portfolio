@@ -15,27 +15,27 @@ export type Experience = {
 /** PLACEHOLDER DATA. Replace with real roles. */
 export const experience: Experience[] = [
   {
-    id: "placeholder-1",
-    role: "Placeholder Role",
-    company: "Placeholder Company",
-    location: "Placeholder City",
-    start: "Jan 2026",
+    id: "sun-strategy-group",
+    role: "Consultant & Lead Developer",
+    company: "Sun Strategy Group",
+    location: "Toronto, ON",
+    start: "May 2026",
     end: "Present",
     bullets: [
-      "Placeholder bullet describing the work.",
-      "Placeholder bullet describing the impact.",
+      "Tech lead @ student-run firm advising SMBs across the GTA; directed a team of 3 across 6 unique clients.",
+      "Advised clients on pricing and brand strategy.",
     ],
   },
   {
-    id: "placeholder-2",
-    role: "Placeholder Role",
-    company: "Placeholder Company",
-    location: "Placeholder City",
-    start: "May 2025",
-    end: "Aug 2025",
+    id: "code-it-hacks",
+    role: "Lead Instructor",
+    company: "Code-It Hacks",
+    location: "Toronto, ON",
+    start: "May 2026",
+    end: "Aug 2026",
     bullets: [
-      "Placeholder bullet describing the work.",
-      "Placeholder bullet describing the impact.",
+      "Taught Python and ML to 100+ students in an intensive summer program.",
+      "Guided students through hands-on lessons and industry relevant projects.",
     ],
   },
 ];
