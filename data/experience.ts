@@ -35,7 +35,7 @@ export const experience: Experience[] = [
     start: "May 2026",
     end: "Aug 2026",
     bullets: [
-      "Taught Python and ML to 100+ students in an intensive summer program.",
+      "Taught Python and ML to 100+ students in an intensive summer program backed by Google and Microsoft.",
       "Guided students through hands-on lessons and industry relevant projects.",
     ],
   },
