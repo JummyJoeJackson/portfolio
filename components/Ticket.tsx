@@ -77,7 +77,7 @@ export function TicketField({
 }) {
   return (
     <div className={cn("min-w-0", className)}>
-      <p className="text-[0.625rem] uppercase tracking-[0.14em] text-muted-foreground">
+      <p className="board-label">
         {label}
       </p>
       <div className="mt-0.5 text-sm">{children}</div>
@@ -123,7 +123,7 @@ export function Ticket({
         <span className="absolute -right-2 -top-2 size-4 rounded-full border border-border bg-background md:bottom-[-0.5rem] md:left-[-0.5rem] md:right-auto md:top-auto" />
 
         <div>
-          <p className="text-[0.625rem] uppercase tracking-[0.14em] text-muted-foreground">
+          <p className="board-label">
             Flight
           </p>
           <p className="mt-0.5 text-sm tabular-nums tracking-wider">

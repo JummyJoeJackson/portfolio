@@ -113,7 +113,7 @@ export function NavPlane({
         className,
       )}
     >
-      <span className="flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4 md:text-base">
+      <span className="board-sign flex items-center gap-2 text-sm font-medium group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4 md:text-base">
         <Icon
           ref={iconRef}
           aria-hidden

@@ -99,7 +99,7 @@ export function PlacesList({ onSelect, selectedId, className }: PlacesListProps)
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
         aria-controls={open ? panelId : undefined}
-        className="rounded-sm px-2 py-1 text-[0.6875rem] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-foreground"
+        className="board-label rounded-sm px-2 py-1 transition-colors hover:text-foreground"
       >
         Places
       </button>

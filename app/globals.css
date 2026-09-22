@@ -177,3 +177,27 @@
     }
   }
 }
+
+/*
+  Airport board lettering. There is only one typeface on the site; what reads
+  as signage is the uppercase and the wide tracking, so it lives in one place
+  rather than being retyped per component. Both classes share a tracking value
+  deliberately: the small labels previously ran tighter than the large ones,
+  which is what made the lettering look inconsistent.
+
+  Defined in the components layer, so Tailwind utilities still override size
+  and colour at the call site.
+*/
+@layer components {
+  .board-sign,
+  .board-label {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+  }
+
+  .board-label {
+    font-size: 0.625rem;
+    line-height: 1rem;
+    color: var(--muted-foreground);
+  }
+}

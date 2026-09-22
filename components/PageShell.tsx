@@ -35,7 +35,7 @@ export function PageShell({ title, subtitle, icon: Icon, children }: PageShellPr
       </Link>
 
       <div className="mt-10">
-        <h1 className="flex items-center gap-2 text-lg font-medium uppercase tracking-[0.18em] md:text-xl">
+        <h1 className="board-sign flex items-center gap-2 text-lg font-medium md:text-xl">
           <Icon aria-hidden className="size-5 shrink-0" />
           {title}
         </h1>

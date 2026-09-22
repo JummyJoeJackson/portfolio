@@ -11,8 +11,29 @@ export type Place = {
   date: string;
   /** One or two short sentences. */
   note: string;
-  /** e.g. "/places/tokyo.jpg" */
+  /**
+   * Optional photo for the card, as a path under public/.
+   *
+   * To add one: drop the file in public/places/ and set this to
+   * "/places/<file>". Anything the browser reads works, though .webp or .avif
+   * will be a good deal smaller than .jpg for the same quality. The card crops
+   * it to 3:2 and fills the frame, so a landscape shot survives best; a
+   * portrait one loses its top and bottom.
+   *
+   * Next optimises and resizes it at build time, so there is no need to shrink
+   * it first. Around 1600px wide is plenty, since the card never shows it
+   * larger than about 290px.
+   */
   image?: string;
+  /**
+   * What the photo shows, for screen readers.
+   *
+   * Leave it unset for an ordinary trip photo. The card already names the
+   * place next to it, so an empty alt is correct and stops a screen reader
+   * reading the same thing twice. Set it only when the photo carries
+   * something the name and note do not.
+   */
+  imageAlt?: string;
 };
 
 /**
@@ -27,6 +48,8 @@ export const places: Place[] = [
     location: [35.6762, 139.6503],
     date: "Placeholder date",
     note: "Placeholder note. Replace this entry with a real trip.",
+    // A photo is optional. Drop the file in public/places/ and point at it:
+    // image: "/places/tokyo.jpg",
   },
   {
     id: "lisbon",

@@ -278,6 +278,42 @@ Simple list or card grid, restrained. No heavy hover effects.
 
 Seed both files with 2 to 3 clearly marked placeholder entries. I'll fill in real content.
 
+### 7.3 Ticket deck (Phase 8)
+
+Instead of a vertical list of boarding passes, stack them on top of each other like a deck and let me move through them one at a time, the way you flip through flashcards.
+
+This replaces the list layout on both Experience and Projects. The ticket design itself does not change.
+
+**Deck**
+
+- One ticket is active and fully visible. The next two or three sit behind it, offset down by a few pixels and scaled down slightly, so the stack reads as a pile with depth. Everything further back is not rendered.
+- The deck sits at a fixed height so the page does not jump as cards of different heights come forward. Height comes from the tallest card in the set, measured once.
+- A quiet position indicator, for example `3 / 7`, near the deck. Plain text, same muted style as the rest of the site.
+
+**Moving through it**
+
+- Drag or swipe the top card sideways to send it away and bring the next one forward. Pointer events, so mouse and touch use the same path.
+- Release below a distance threshold and the card springs back instead of advancing. Use the same roughly 5px slop as the globe so a click is never read as a drag.
+- Left and right arrow keys move between cards when the deck has focus. The deck is one tab stop, not one per card.
+- Small previous and next text controls as well, so it works without dragging at all. Never an icon only control.
+- The deck wraps around at both ends, and sending the last card away brings the first back.
+
+**Rules**
+
+- Every ticket must stay reachable with a keyboard alone, and any link inside a ticket must be reachable too. Only the active card's links should be in the tab order; cards behind it are inert.
+- Screen readers should be told which card is showing, for example a live region announcing `Ticket 3 of 7`, and the cards behind the active one should be hidden from assistive technology.
+- `prefers-reduced-motion`: no sliding and no spring. Cards cut from one to the next, and the stack offsets can stay since they are static.
+- Animate transform and opacity only, same rule as the transitions.
+- Dragging a card must never trigger a link inside it.
+- Do not capture vertical scrolling. A mostly vertical drag should scroll the page as usual, so only a mostly horizontal gesture moves the deck.
+- If JavaScript does not run, the tickets must still all be readable. Fall back to the plain stacked list rather than showing only the top card, the same way the CSS entrance was kept working without JS.
+
+**Open questions for me, don't guess**
+
+- Should the deck advance on a vertical swipe instead, since a page of tickets reads top to bottom?
+- Should Experience and Projects both use the deck, or only one of them?
+- Do you want the discarded card to fly off like the plane, or just fade?
+
 ---
 
 ## 8. Design system
@@ -367,6 +403,10 @@ public/
 
 - Metadata, favicon, OG image, WebGL fallback, Lighthouse pass.
 
+**Phase 8: Ticket deck**
+
+- Stack the Experience and Projects tickets into a swipeable deck per section 7.3, with keyboard and pointer parity, a no-JavaScript fallback, and reduced motion handled.
+
 ---
 
 ## 12. Acceptance checklist
@@ -382,6 +422,9 @@ public/
 - [ ] Home always fades in the same way (first load, back link, browser back).
 - [ ] Reduced motion setting is respected everywhere.
 - [ ] All content (places, experience, projects, links, hook) is edited only in `data/` files.
+- [ ] Every ticket in the deck is reachable by keyboard alone, and the cards behind the active one are inert and hidden from assistive technology.
+- [ ] A mostly vertical drag on the deck scrolls the page instead of changing card.
+- [ ] With JavaScript off, every ticket is still readable rather than only the top one.
 - [ ] No MDX, no em dashes in site copy.
 
 ---

@@ -96,7 +96,7 @@ export function PlaceCard({ place, onClose, className }: PlaceCardProps) {
         <div className="relative mt-3 aspect-[3/2] w-full overflow-hidden rounded-md bg-muted">
           <Image
             src={place.image}
-            alt=""
+            alt={place.imageAlt ?? ""}
             fill
             sizes="(max-width: 768px) 100vw, 18rem"
             className="object-cover"
