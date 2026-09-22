@@ -3,16 +3,12 @@ export type Experience = {
   role: string;
   company: string;
   location: string;
-  /** e.g. "May 2026" */
   start: string;
-  /** e.g. "Aug 2026" or "Present" */
   end: string;
-  /** 2 to 3 short points. */
   bullets: string[];
   link?: string;
 };
 
-/** PLACEHOLDER DATA. Replace with real roles. */
 export const experience: Experience[] = [
   {
     id: "sun-strategy-group",
