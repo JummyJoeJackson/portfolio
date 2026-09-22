@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 
 import { site } from "@/data/site";
 import "./globals.css";
@@ -44,7 +45,19 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${geistSans.variable} antialiased`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        {/*
+          Vercel Analytics. Mounted once in the root layout rather than per
+          page, which is what covers every route: the layout wraps all of them
+          and survives client side navigation, so page views are counted once
+          each. Repeating it per page would mount a second collector.
+
+          It only reports from a Vercel deployment with Analytics switched on
+          for the project; locally it is inert.
+        */}
+        <Analytics />
+      </body>
     </html>
   );
 }
