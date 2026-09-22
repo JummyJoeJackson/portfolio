@@ -8,10 +8,9 @@ export const site = {
   /**
    * Absolute origin, used to resolve Open Graph and icon URLs. Social
    * scrapers will not follow a relative path, so this has to be absolute.
-   * TODO: replace with the real custom domain. Vercel preview builds fall
-   * back to their own URL, see app/layout.tsx.
+   * Vercel preview builds fall back to their own URL, see app/layout.tsx.
    */
-  url: "https://diegogonzalez.dev",
+  url: "https://diegogonzalez.tech",
   /** TODO: replace with the real one-line hook. */
   hook: "Data Science @ University of Waterloo",
   /** Used for the flight-path arc origin in section 5.6. */
