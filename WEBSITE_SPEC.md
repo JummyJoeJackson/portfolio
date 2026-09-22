@@ -431,7 +431,15 @@ public/
 
 ## 13. Open items (ask me, don't guess)
 
-- Light or dark theme.
-- The one-line hook.
-- Real places, experience, projects, and resume PDF.
-- Whether to turn on the flight-path arc option.
+Decided:
+
+- **Theme: light only** for now. The dark palette stays in the codebase unused.
+- **Hook:** "I turn messy data into something you can use".
+- **Flight-path arcs: on**, meaning the home to selected place arc. The separate place to place option stays off.
+- **Resume PDF:** done.
+- **Nothing is carried over from the previous portfolio**, and no MDX.
+
+Still needed:
+
+- Real experience entries. There is no source for these anywhere.
+- Real places and projects.

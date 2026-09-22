@@ -162,4 +162,4 @@ To switch the domain over, change the Production Branch in Vercel from `master` 
 
 ## Still open
 
-`WEBSITE_SPEC.md` section 13 lists the decisions not yet made: light or dark, the final hook, and whether to turn the flight path arcs on.
+Design decisions are settled and recorded in `WEBSITE_SPEC.md` section 13: light only, arcs on, hook written. What remains is real content, above all the experience entries in `data/experience.ts`, which are still placeholders.

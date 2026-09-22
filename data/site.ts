@@ -11,8 +11,7 @@ export const site = {
    * Vercel preview builds fall back to their own URL, see app/layout.tsx.
    */
   url: "https://diegogonzalez.tech",
-  /** TODO: replace with the real one-line hook. */
-  hook: "Data Science @ University of Waterloo",
+  hook: "I turn messy data into something you can use",
   /** Used for the flight-path arc origin in section 5.6. */
   home: {
     label: "Toronto",
@@ -29,8 +28,12 @@ export const links = {
 
 export const features = {
   /** Faint arc from home to the selected place while its card is open. */
-  homeArc: false,
-  /** Arcs between two selected places. */
+  homeArc: true,
+  /**
+   * Also link the open place to every other place. Separate from homeArc and
+   * left off: with more than a handful of pins this draws a starburst, which
+   * is the opposite of the "noticeable, not flashy" the brief asks for.
+   */
   placeToPlaceArcs: false,
 } as const;
 
@@ -69,5 +72,10 @@ export const globeThemes: { light: GlobeTheme; dark: GlobeTheme } = {
   },
 };
 
-/** TODO: flip once the light/dark decision is made. */
+/*
+  Light only for now. The dark palette above is kept deliberately, both here
+  and as the .dark block in globals.css, so switching later is two lines
+  rather than a rebuild: point this at globeThemes.dark and add class="dark"
+  to the html tag in app/layout.tsx.
+*/
 export const globeTheme = globeThemes.light;

@@ -8,6 +8,13 @@
   data/site.ts, nothing else.
 */
 :root {
+  /*
+    Light only for now. Without this, a visitor whose system is set to dark
+    gets dark scrollbars, form controls and text fields against a light page.
+    Remove it if the .dark palette is ever switched on.
+  */
+  color-scheme: light;
+
   --background: oklch(0.985 0 0);
   --foreground: oklch(0.175 0 0);
 
