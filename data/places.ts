@@ -122,7 +122,7 @@ export const places: Place[] = [
     label: "Edinburgh",
     name: "Edinburgh, Scotland",
     location: [55.9533, -3.1883],
-    date: "August 2026",
+    date: "August 2025",
     note: "A short trip to the UK with family.",
     image: "/places/edinburgh.png",
   },
