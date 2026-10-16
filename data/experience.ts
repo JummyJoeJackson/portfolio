@@ -20,7 +20,7 @@ export const experience: Experience[] = [
     bullets: [
       "Incoming Winter 2027",
     ],
-    link: "scotiabank.com",
+    link: "https://www.scotiabank.com/ca/en/personal.html",
   },
   {
     id: "sun-strategy-group",
@@ -33,7 +33,7 @@ export const experience: Experience[] = [
       "Directed a team of 3 across 6 client projects for small and medium-sized businesses (SMBs) across Ontario",
       "Led recommendation calls with tech clients and designed custom websites",
     ],
-    link: "sunstrategygroup.ca",
+    link: "https://www.sunstrategygroup.ca/",
   },
   {
     id: "code-it-hacks",
@@ -46,6 +46,6 @@ export const experience: Experience[] = [
       "Taught Python and ML to 100+ students in an intensive summer program",
       "Translated advanced technical concepts into age-appropriate, hands-on lessons and gave students exposure to industry tools",
     ],
-    link: "codeithackskids.com",
+    link: "https://www.codeithackskids.com/",
   },
 ];
