@@ -46,5 +46,6 @@ export const experience: Experience[] = [
       "Taught Python and ML to 100+ students in an intensive summer program",
       "Translated advanced technical concepts into age-appropriate, hands-on lessons and gave students exposure to industry tools",
     ],
+    link: "https://www.codeithackskids.com/",
   },
 ];
