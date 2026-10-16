@@ -11,6 +11,18 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
+    id: "scotiabank",
+    role: "Data Science Intern",
+    company: "Scotiabank",
+    location: "Toronto (YYZ)",
+    start: "Jan 2027",
+    end: "Apr 2027",
+    bullets: [
+      "Real-world impact @ Canada's 3rd largest bank",
+      "Developed ML solutions that improved operational efficiency and customer outcomes",
+    ],
+  },
+  {
     id: "sun-strategy-group",
     role: "Consultant & Lead Developer",
     company: "Sun Strategy Group",
@@ -29,10 +41,10 @@ export const experience: Experience[] = [
     company: "Code-It Hacks",
     location: "Toronto (YYZ)",
     start: "May 2026",
-    end: "Aug 2026",
+    end: "Sep 2026",
     bullets: [
       "Taught Python and ML to 100+ students in an intensive summer program backed by Google and Microsoft.",
-      "Guided students through hands-on lessons and industry relevant projects.",
+      "Led 200+ hours of instruction and mentorship, helping students build AI/ML projects",
     ],
   },
 ];
