@@ -271,6 +271,8 @@ export function TicketDeck({
                 onDragEnd={(_, info) => {
                   const far = Math.abs(info.offset.x) > drag.advance;
                   const fast = Math.abs(info.velocity.x) > ADVANCE_VELOCITY;
+                  // Reset so the next click on the newly-active card isn't swallowed.
+                  dragged.current = false;
                   if (!far && !fast) return; // springs back on its own
                   // Left sends you forward, the way a discarded card reads.
                   if (info.offset.x < 0) go(1, -1);
