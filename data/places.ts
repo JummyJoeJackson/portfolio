@@ -55,6 +55,24 @@ export const places: Place[] = [
     image: "/places/toronto.png",
   },
   {
+    id: "vancouver",
+    label: "Vancouver",
+    name: "Vancouver, Canada",
+    location: [49.2827, -123.1207],
+    date: "June 2024",
+    note: "Short stopover on the way to Japan.",
+    image: "/places/vancouver.png",
+  },
+  {
+    id: "los-angeles",
+    label: "Los Angeles",
+    name: "Los Angeles, USA",
+    location: [34.0522, -118.2437],
+    date: "July 2019",
+    note: "Roadtrip down the California coast."
+    image: "/places/los-angeles.png",
+  },
+  {
     id: "tokyo",
     label: "Tokyo",
     name: "Tokyo, Japan",
@@ -69,7 +87,7 @@ export const places: Place[] = [
     name: "Paris, France",
     location: [48.8566, 2.3522],
     date: "August 2025",
-    note: "A weekend trip to celebrate a birthday with family. Caught the Eiffel Tower sparkle show and ate my weight in croissants.",
+    note: "A trip with family to celebrate a birthday. Caught the Eiffel Tower sparkle show and ate my weight in croissants.",
     image: "/places/paris.png",
   },
   {
@@ -77,8 +95,8 @@ export const places: Place[] = [
     label: "Mexico City",
     name: "Mexico City, Mexico",
     location: [19.4326, -99.1332],
-    date: "Placeholder date",
-    note: "Placeholder note. Replace this entry with a real trip.",
+    date: "December 2025",
+    note: "New Year's trip visiting family.",
     image: "/places/mexico-city.png",
   },
   {
@@ -87,8 +105,26 @@ export const places: Place[] = [
     name: "Rome, Italy",
     location: [41.9028, 12.4964],
     date: "March 2024",
-    note: "School trip. Ate the best carbonara of my life.",
+    note: "School trip. Bought the best bread of my life for 1 cent.",
     image: "/places/rome.png",
+  },
+  {
+    id: "barcelona",
+    label: "Barcelona",
+    name: "Barcelona, Spain",
+    location: [41.3851, 2.1734],
+    date: "March 2023",
+    note: "School trip. Spent the sunny days walking around the city.",
+    image: "/places/barcelona.png",
+  },
+  {
+    id: "edinburgh",
+    label: "Edinburgh",
+    name: "Edinburgh, Scotland",
+    location: [55.9533, -3.1883],
+    date: "August 2026",
+    note: "A short trip to the UK with family.",
+    image: "/places/edinburgh.png",
   },
 ];
 
