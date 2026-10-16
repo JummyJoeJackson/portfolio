@@ -69,7 +69,7 @@ export const places: Place[] = [
     name: "Los Angeles, USA",
     location: [34.0522, -118.2437],
     date: "July 2019",
-    note: "Roadtrip down the California coast."
+    note: "Roadtrip down the California coast.",
     image: "/places/los-angeles.png",
   },
   {
